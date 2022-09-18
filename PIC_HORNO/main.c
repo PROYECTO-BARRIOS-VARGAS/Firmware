@@ -11,7 +11,7 @@
 */
 
 /*
-© [2022] Microchip Technology Inc. and its subsidiaries.
+ï¿½ [2022] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -35,11 +35,25 @@
 /*
     Main application
 */
+void delay(uint32_t value)
+{
+    for(volatile int i = 0; i < value; i++);
+}
+
+typedef struct MESSAGE{
+    uint8_t opcode  : 4;
+    uint8_t addr    : 4;
+    uint8_t data    : 8;
+}MESSAGE;
+
+MESSAGE message_buffer;
 
 int main(void)
 {
     SYSTEM_Initialize();
-
+    
+    delay(1000000);
+    
     // If using interrupts in PIC18 High/Low Priority Mode you need to enable the Global High and Low Interrupts 
     // If using interrupts in PIC Mid-Range Compatibility Mode you need to enable the Global Interrupts 
     // Use the following macros to: 
@@ -49,9 +63,19 @@ int main(void)
 
     // Disable the Global Interrupts 
     //INTERRUPT_GlobalInterruptDisable(); 
+    uint8_t message_buffer;
 
-
+    message_buffer = 0;
+    UART1_Enable();
+    UART1_TransmitEnable();
     while(1)
     {
+        LED_Toggle();
+        if (UART1.IsTxReady())
+        {
+            UART1.Write(message_buffer);
+            message_buffer++;
+            delay(100000);
+        }    
     }    
 }

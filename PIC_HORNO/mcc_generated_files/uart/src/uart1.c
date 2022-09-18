@@ -96,7 +96,7 @@ void UART1_Initialize(void)
 {
 
     // Set the UART1 module to the options selected in the user interface.
-
+    
     //RXB disabled; 
     U1RXB = 0x0; 
     //RXCHK disabled; 
@@ -123,8 +123,8 @@ void UART1_Initialize(void)
     U1CON1 = 0x80; 
     //FLO off; TXPOL not inverted; C0EN Add all TX and RX characters; STP Transmit 1Stop bit, receiver verifies first Stop bit; RXPOL not inverted; RUNOVF RX input shifter stops all activity; 
     U1CON2 = 0x0; 
-    //BRGL 1; 
-    U1BRGL = 0x1; 
+    //BRGL 207; 
+    U1BRGL = 0xCF; 
     //BRGH 0; 
     U1BRGH = 0x0; 
     //STPMD in middle of first Stop bit; TXWRE No error; 
