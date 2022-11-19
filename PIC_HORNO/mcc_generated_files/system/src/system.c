@@ -44,6 +44,7 @@ void SYSTEM_Initialize(void)
 {
     CLOCK_Initialize();
     PIN_MANAGER_Initialize();
+    Timer0_Initialize();
     UART1_Initialize();
     INTERRUPT_Initialize();
 }

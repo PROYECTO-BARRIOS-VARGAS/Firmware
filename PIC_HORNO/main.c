@@ -31,6 +31,10 @@
     THIS SOFTWARE.
 */
 #include "mcc_generated_files/system/system.h"
+#include "IPG_process.h"
+#include "IPG_data.h"
+#include "COMM_operation.h"
+#include "COMM_config.h"
 
 /*
     Main application
@@ -49,11 +53,9 @@ typedef struct MESSAGE{
 MESSAGE message_buffer;
 
 int main(void)
-{
+{    
     SYSTEM_Initialize();
-    
-    delay(1000000);
-    
+      
     // If using interrupts in PIC18 High/Low Priority Mode you need to enable the Global High and Low Interrupts 
     // If using interrupts in PIC Mid-Range Compatibility Mode you need to enable the Global Interrupts 
     // Use the following macros to: 
@@ -63,19 +65,65 @@ int main(void)
 
     // Disable the Global Interrupts 
     //INTERRUPT_GlobalInterruptDisable(); 
-    uint8_t message_buffer;
-
-    message_buffer = 0;
     UART1_Enable();
-    UART1_TransmitEnable();
+    COMM_init();
+    
+//    LED_SetLow();
+    CMD_message cmd;
+    IPG_status  status[2];
+//    LED_Toggle();
+    __delay_ms(10);
     while(1)
     {
-        LED_Toggle();
-        if (UART1.IsTxReady())
+        run_status_update(0);
+        run_status_update(1);
+        __delay_ms(1);
+        if (COMM_command_available())
         {
-            UART1.Write(message_buffer);
-            message_buffer++;
-            delay(100000);
-        }    
-    }    
+            cmd = COMM_receive_command();
+//            IPG_set_comm_status(0, OK_SIGNAL);
+//            IPG_set_comm_status(1, OK_SIGNAL);
+            status[0] = IPG_get_status(0);
+            status[1] = IPG_get_status(1);
+            COMM_send_status(((uint8_t *)&cmd));
+            LED_Toggle();
+        }
+        
+    }
 }
+            
+// UART READ
+//        if (UART1.IsRxReady())
+//        {
+//            buff = UART1.Read();
+//            LED_Toggle();
+//        }
+//  UART WRITE
+//        if (UART1.IsTxReady())
+//        {   
+//            UART1.Write(message_buffer);
+////            while (!UART1.IsTxDone());
+//            message_buffer++; 
+//            delay(100000);
+//        }   
+//  UART ECHO
+        
+//        if (UART1.IsRxReady())
+//        {
+//            
+//            
+//            buff = UART1.Read();
+//            UART1.Read();
+//            LED_Toggle();
+//            TXDE_SetHigh();
+//            if (UART1.IsTxReady())
+//            {   
+//                UART1.Write(buff);
+//                while (!UART1.IsTxDone());
+//            }
+//            TXDE_SetLow();
+//        }
+//        LED_Toggle();
+//        delay(10000);
+//    }    
+//}

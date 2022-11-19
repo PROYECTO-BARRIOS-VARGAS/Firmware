@@ -1,15 +1,14 @@
 /**
- * System Driver Header File
+ * DELAY Generated Driver API Header File
  * 
- * @file system.h
+ * @file delay.h
  * 
- * @defgroup systemdriver System Driver
+ * @defgroup delay DELAY BLOCKING DRIVER
  * 
- * @brief This is the generated header file for the System Driver.
+ * @brief This file contains the API to generate delays in the millisecond and microsecond ranges.
  *
- * @version Driver Version 2.0.1
+ * @version DELAY Driver Version 1.1.0
 */
-
 /*
 © [2022] Microchip Technology Inc. and its subsidiaries.
 
@@ -31,33 +30,23 @@
     THIS SOFTWARE.
 */
 
-#ifndef SYSTEM_H
-#define	SYSTEM_H
+#ifndef _DELAY_H
+#define _DELAY_H
 
-/**
-  Section: Included Files
-*/
-#include <xc.h>
 #include <stdint.h>
-#include <stdbool.h>
-#include <conio.h>
-#include "../system/config_bits.h"
-#include "../system/clock.h"
-#include "../system/pins.h"
-#include "../timer/tmr0.h"
-#include "../uart/uart1.h"
-#include "../system/interrupt.h"
 
 /**
- * @ingroup systemdriver
- * @brief This initializes the system module and must be called before any other API is called.
- * This routine should only be called once during system initialization.
- * @param None
- * @return None
+*  @ingroup delay
+*  @brief Call this function to delay execution of the program for a certain number of milliseconds
+*  @param milliseconds - number of milliseconds to delay
 */
-void SYSTEM_Initialize(void);
+void DELAY_milliseconds(uint16_t milliseconds);
 
-#endif	/* SYSTEM_H */
 /**
- End of File
+*  @ingroup delay
+*  @brief Call this function to delay execution of the program for a certain number of microseconds
+*  @param microseconds - number of microseconds to delay
 */
+void DELAY_microseconds(uint16_t microseconds);
+
+#endif	// _DELAY_H

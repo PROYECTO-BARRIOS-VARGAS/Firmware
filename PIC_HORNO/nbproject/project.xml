@@ -12,7 +12,14 @@
             <asminc-extensions/>
             <sourceEncoding>ISO-8859-1</sourceEncoding>
             <make-dep-projects/>
-            <sourceRootList/>
+            <sourceRootList>
+                <sourceRootElem>horno/COMM</sourceRootElem>
+                <sourceRootElem>horno/INPUT</sourceRootElem>
+                <sourceRootElem>horno/IPG</sourceRootElem>
+                <sourceRootElem>horno/MUX</sourceRootElem>
+                <sourceRootElem>horno/src</sourceRootElem>
+                <sourceRootElem>horno/inc</sourceRootElem>
+            </sourceRootList>
             <confList>
                 <confElem>
                     <name>default</name>

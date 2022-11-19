@@ -1,15 +1,14 @@
 /**
- * System Driver Header File
+ * DELAY Generated Driver File
  * 
- * @file system.h
+ * @file delay.c
  * 
- * @defgroup systemdriver System Driver
+ * @ingroup delay
  * 
- * @brief This is the generated header file for the System Driver.
+ * @brief This file contains the functions to generate delays in the millisecond and microsecond ranges as well as using timer ticks to indicate delay length.
  *
- * @version Driver Version 2.0.1
+ * @version DELAY Driver Version 1.1.0
 */
-
 /*
 © [2022] Microchip Technology Inc. and its subsidiaries.
 
@@ -31,33 +30,25 @@
     THIS SOFTWARE.
 */
 
-#ifndef SYSTEM_H
-#define	SYSTEM_H
-
-/**
-  Section: Included Files
-*/
+#include "../../system/config_bits.h"
 #include <xc.h>
 #include <stdint.h>
-#include <stdbool.h>
-#include <conio.h>
-#include "../system/config_bits.h"
-#include "../system/clock.h"
-#include "../system/pins.h"
-#include "../timer/tmr0.h"
-#include "../uart/uart1.h"
-#include "../system/interrupt.h"
 
-/**
- * @ingroup systemdriver
- * @brief This initializes the system module and must be called before any other API is called.
- * This routine should only be called once during system initialization.
- * @param None
- * @return None
-*/
-void SYSTEM_Initialize(void);
+void DELAY_milliseconds(uint16_t milliseconds) {
+    while(milliseconds--){ 
+        __delay_ms(1); 
+    }
+}
 
-#endif	/* SYSTEM_H */
-/**
- End of File
-*/
+void DELAY_microseconds(uint16_t microseconds) {
+    while( microseconds >= 32)
+    {
+        __delay_us(32);
+        microseconds -= 32;
+    }
+    
+    while(microseconds--)
+    {
+        __delay_us(1);
+    }
+}

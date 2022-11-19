@@ -4,6 +4,27 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <logicalFolder name="COMM" displayName="COMM" projectFiles="true">
+        <itemPath>horno/COMM/COMM_config.h</itemPath>
+        <itemPath>horno/COMM/COMM_message.h</itemPath>
+        <itemPath>horno/COMM/COMM_operation.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="inc" displayName="inc" projectFiles="true">
+        <itemPath>horno/inc/proj_config.h</itemPath>
+        <itemPath>horno/inc/proj_types.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="INPUT" displayName="INPUT" projectFiles="true">
+        <itemPath>horno/INPUT/INPUT_analog.h</itemPath>
+        <itemPath>horno/INPUT/INPUT_phy_addr.h</itemPath>
+        <itemPath>horno/INPUT/INPUT_pulse_detect.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="IPG" displayName="IPG" projectFiles="true">
+        <itemPath>horno/IPG/IPG_burn_in_control.h</itemPath>
+        <itemPath>horno/IPG/IPG_check.h</itemPath>
+        <itemPath>horno/IPG/IPG_config.h</itemPath>
+        <itemPath>horno/IPG/IPG_data.h</itemPath>
+        <itemPath>horno/IPG/IPG_process.h</itemPath>
+      </logicalFolder>
       <logicalFolder name="MCC Generated Files"
                      displayName="MCC Generated Files"
                      projectFiles="true">
@@ -14,11 +35,19 @@
           <itemPath>mcc_generated_files/system/pins.h</itemPath>
           <itemPath>mcc_generated_files/system/config_bits.h</itemPath>
         </logicalFolder>
+        <logicalFolder name="timer" displayName="timer" projectFiles="true">
+          <itemPath>mcc_generated_files/timer/delay.h</itemPath>
+          <itemPath>mcc_generated_files/timer/timer_interface.h</itemPath>
+          <itemPath>mcc_generated_files/timer/tmr0.h</itemPath>
+        </logicalFolder>
         <logicalFolder name="uart" displayName="uart" projectFiles="true">
           <itemPath>mcc_generated_files/uart/uart1.h</itemPath>
           <itemPath>mcc_generated_files/uart/uart_drv_interface.h</itemPath>
           <itemPath>mcc_generated_files/uart/uart_types.h</itemPath>
         </logicalFolder>
+      </logicalFolder>
+      <logicalFolder name="MUX" displayName="MUX" projectFiles="true">
+        <itemPath>horno/MUX/MUX_driver.h</itemPath>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
@@ -31,6 +60,9 @@
       <logicalFolder name="MCC Generated Files"
                      displayName="MCC Generated Files"
                      projectFiles="true">
+        <logicalFolder name="docs" displayName="docs" projectFiles="true">
+          <itemPath>mcc_generated_files/docs/delay.dox</itemPath>
+        </logicalFolder>
         <logicalFolder name="system" displayName="system" projectFiles="true">
           <logicalFolder name="src" displayName="src" projectFiles="true">
             <itemPath>mcc_generated_files/system/src/pins.c</itemPath>
@@ -40,11 +72,28 @@
             <itemPath>mcc_generated_files/system/src/clock.c</itemPath>
           </logicalFolder>
         </logicalFolder>
+        <logicalFolder name="timer" displayName="timer" projectFiles="true">
+          <logicalFolder name="src" displayName="src" projectFiles="true">
+            <itemPath>mcc_generated_files/timer/src/delay.c</itemPath>
+            <itemPath>mcc_generated_files/timer/src/tmr0.c</itemPath>
+          </logicalFolder>
+        </logicalFolder>
         <logicalFolder name="uart" displayName="uart" projectFiles="true">
           <logicalFolder name="src" displayName="src" projectFiles="true">
             <itemPath>mcc_generated_files/uart/src/uart1.c</itemPath>
           </logicalFolder>
         </logicalFolder>
+      </logicalFolder>
+      <logicalFolder name="src" displayName="src" projectFiles="true">
+        <itemPath>horno/COMM/src/COMM_config.c</itemPath>
+        <itemPath>horno/COMM/src/COMM_operation.c</itemPath>
+        <itemPath>horno/INPUT/src/INPUT_phy_addr.c</itemPath>
+        <itemPath>horno/INPUT/src/INPUT_pulse_detect.c</itemPath>
+        <itemPath>horno/IPG/src/IPG_burn_in_control.c</itemPath>
+        <itemPath>horno/IPG/src/IPG_check.c</itemPath>
+        <itemPath>horno/IPG/src/IPG_data.c</itemPath>
+        <itemPath>horno/IPG/src/IPG_process.c</itemPath>
+        <itemPath>horno/MUX/src/MUX_driver.c</itemPath>
       </logicalFolder>
       <itemPath>main.c</itemPath>
     </logicalFolder>
@@ -55,6 +104,14 @@
       <itemPath>PIC_HORNO.mc3</itemPath>
     </logicalFolder>
   </logicalFolder>
+  <sourceRootList>
+    <Elem>horno/COMM</Elem>
+    <Elem>horno/INPUT</Elem>
+    <Elem>horno/IPG</Elem>
+    <Elem>horno/MUX</Elem>
+    <Elem>horno/src</Elem>
+    <Elem>horno/inc</Elem>
+  </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="default" type="2">
@@ -105,21 +162,22 @@
         <property key="default-bitfield-type" value="true"/>
         <property key="default-char-type" value="true"/>
         <property key="define-macros" value=""/>
-        <property key="disable-optimizations" value="true"/>
-        <property key="extra-include-directories" value=""/>
+        <property key="disable-optimizations" value="false"/>
+        <property key="extra-include-directories"
+                  value="horno\COMM;horno\INPUT;horno\IPG;horno\MUX;horno\inc"/>
         <property key="favor-optimization-for" value="-speed,+space"/>
         <property key="garbage-collect-data" value="true"/>
         <property key="garbage-collect-functions" value="true"/>
         <property key="identifier-length" value="255"/>
         <property key="local-generation" value="false"/>
-        <property key="operation-mode" value="free"/>
+        <property key="operation-mode" value="std"/>
         <property key="opt-xc8-compiler-strict_ansi" value="false"/>
         <property key="optimization-assembler" value="true"/>
         <property key="optimization-assembler-files" value="true"/>
         <property key="optimization-debug" value="false"/>
         <property key="optimization-invariant-enable" value="false"/>
         <property key="optimization-invariant-value" value="16"/>
-        <property key="optimization-level" value="-O0"/>
+        <property key="optimization-level" value="-O2"/>
         <property key="optimization-speed" value="false"/>
         <property key="optimization-stable-enable" value="false"/>
         <property key="preprocess-assembler" value="true"/>
@@ -185,6 +243,8 @@
         <property key="communication.interface"
                   value="${communication.interface.default}"/>
         <property key="communication.speed" value="${communication.speed.default}"/>
+        <property key="debugoptions.debug-startup" value="Use system settings"/>
+        <property key="debugoptions.reset-behaviour" value="Use system settings"/>
         <property key="debugoptions.useswbreakpoints" value="false"/>
         <property key="firmware.path"
                   value="Press to browse for a specific firmware version"/>
@@ -248,6 +308,8 @@
         <property key="communication.interface"
                   value="${communication.interface.default}"/>
         <property key="communication.speed" value="${communication.speed.default}"/>
+        <property key="debugoptions.debug-startup" value="Use system settings"/>
+        <property key="debugoptions.reset-behaviour" value="Use system settings"/>
         <property key="debugoptions.useswbreakpoints" value="false"/>
         <property key="firmware.path"
                   value="Press to browse for a specific firmware version"/>
